@@ -4,4 +4,5 @@
 
 Kaggle APTOS 2019 Blindness Detection
 This repository contains files related to the Kaggle APTOS 2019 competition.
-I won a bronze medal in this competition. 
+
+Compettion Score : Top 7%  (Bronze Medal)
