@@ -1,2 +1,5 @@
+
+![alt text](https://github.com/omershect/APOS2019/blob/master/Images/Capture.JPG)
+
 # APOS2019
-Kaggle APTOs 2019 competition
+Kaggle APTOS 2019 Blindness Detection
