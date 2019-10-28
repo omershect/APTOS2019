@@ -25,8 +25,16 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 test = '../input/aptos2019-blindness-detection/test_images/'
 
+############################################################
+# Pytorch Infernce Kernel For Kaggle APTOS 2019            #
+# This code uses various models which are Ensembled         #
+# Also Using TTA                                           #
+############################################################
 
 
+
+
+### Data Set Loader 
 class RetinopathyDatasetTest(Dataset):
     def __init__(self, csv_file, transform):
         self.data = pd.read_csv(csv_file)
@@ -45,6 +53,7 @@ class RetinopathyDatasetTest(Dataset):
 package_path = '../input/efficientpytorch/'
 sys.path.append(package_path)
 from efficientnetpytorch import EfficientNet
+
 
 ######### EFF 256 Models ########################256#################################
     
@@ -69,8 +78,6 @@ model1.load_state_dict(torch.load("../input/model-res-256/effb4oldtrearlystop_we
 model1 = model1.to(device)
 
 print("load model 1 ")
-
-
 
 
 
@@ -181,7 +188,7 @@ model9 = model9.to(device)
 print("load model9 ")
 
 
-
+### Image Pre Processing 
 
 
 def crop_image1(img,tol=7):
@@ -213,7 +220,7 @@ def crop_image_from_gray(img,tol=7):
 
 
 
-
+#Prepare Model for Prediction  
 
     
 for i in range(10):
@@ -223,10 +230,6 @@ for i in range(10):
         param.requires_grad = False
     print("complete eval model:",i)
         
-
-
-
-
 
 
 
@@ -273,6 +276,8 @@ test_transform = transforms.Compose([
 
 testset        = MyDataset(pd.read_csv('../input/aptos2019-blindness-detection/sample_submission.csv'), image_size = 256,transform=test_transform)
 test_loader    = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False)
+
+#Predict
  
 for j in range(3):
     
@@ -291,8 +296,7 @@ for j in range(3):
         if j == 2  : 
             pred = model2(images)
       
-        
-        
+       
        
        
         
@@ -402,8 +406,7 @@ for j in range(9,10):
       
 
 
-        
-#test_preds = (test_preds0 + test_preds1 + test_preds2 + test_preds3 + test_preds4 + test_preds5 + test_preds6 + test_preds7 + test_preds8 + test_preds9 ) / 10.0
+#Ensemble
 test_pred_mean = (test_preds0 + test_preds1 + test_preds2+ test_preds3+ test_preds4 + test_preds5 + test_preds6 +test_preds7 +test_preds8 + test_preds9 ) / 10.0
 
 coef = [0.57, 1.37, 2.57, 3.57]
