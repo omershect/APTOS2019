@@ -10,9 +10,10 @@ Millions of people suffer from diabetic retinopathy, the leading cause of blindn
 
 
 Repository Contain  : 
-Inference_Code : Python code for Prediction the test set of the competition.
 
-Train: Ipynb, NoteBook of training one of the models using EfficnetNet B4  
+* Inference_Code : Python code for Prediction the test set of the competition.
+
+* Train: Ipynb, NoteBook of training one of the models using EfficnetNet B4  
 
 
 
